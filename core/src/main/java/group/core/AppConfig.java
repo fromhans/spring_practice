@@ -1,7 +1,6 @@
 package group.core;
 
 import group.core.discount.DiscountPolicy;
-import group.core.discount.FixDiscountPolicy;
 import group.core.discount.RateDiscountPolicy;
 import group.core.member.MemberService;
 import group.core.member.MemberServiceImpl;
@@ -18,18 +17,20 @@ public class AppConfig {
     public MemberService memberService() {
         return new MemberServiceImpl(memberRepository());
     }
+
     @Bean
     public MemoryMemberRepository memberRepository() {
         return new MemoryMemberRepository();
     }
+
     @Bean
     public OrderService orderService() {
         return new OrderServiceImpl(memberRepository(), discountPolicy());
     }
+
     @Bean
     public DiscountPolicy discountPolicy() {
 //        return new FixDiscountPolicy();
         return new RateDiscountPolicy();
     }
-
 }
